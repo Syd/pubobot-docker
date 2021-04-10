@@ -34,3 +34,5 @@ ENV IPC_SECRET "5i2jd93j5la9"
 ENV DISCORD_TOKEN ""
 ENV COMMANDS_URL "https://gitlab.com/pubobot-discord/PUBobot-discord/-/blob/master/commands.md"
 ENV WEB_URL "http://change.me"
+CMD ./run.sh
+
