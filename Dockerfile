@@ -20,6 +20,7 @@ USER pubobot
 WORKDIR /home/pubobot/pubobot/
 COPY run.sh .
 RUN pip3 install -r requirements.txt
+RUN touch database.sqlite3 && touch state.json && echo "{}" > state.json
 COPY config.esh .
 COPY client_config.esh .
 
@@ -34,5 +35,5 @@ ENV IPC_SECRET "5i2jd93j5la9"
 ENV DISCORD_TOKEN ""
 ENV COMMANDS_URL "https://gitlab.com/pubobot-discord/PUBobot-discord/-/blob/master/commands.md"
 ENV WEB_URL "http://change.me"
+EXPOSE 5000
 CMD ./run.sh
-
