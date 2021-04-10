@@ -5,11 +5,13 @@ a docker container for [[https://gitlab.com/mittermichal/PUBobot-discord/-/tree/
 
 * quickstart
 #+begin_src sh
-docker run -it -d -e IPC_SECRET=<your choice> -e DISCORD_TOKEN=<your token> \
-    -v database.sqlite3:"/home/pubobot/pubobot/database.sqlite3" \
-    -v state.json:"/home/pubobot/pubobot/state.json" \
-    -e WEB_URL="http://change.me" \
-    sydz/pubobot:latest`
+    docker run -it -d --name pubobot -p 5000:5000 \
+        -e IPC_SECRET="change me" -e WEB_URL="https://change.me:5000" \
+        -e DISCORD_TOKEN="token" \
+        -v $(pwd)/database.sqlite3:/home/pubobot/pubobot/database.sqlite3 \
+        -v $(pwd)/state.json:/home/pubobot/pubobot/state.json \
+        --restart=always
+        sydz/pubobot:latest
 #+end_src
 * variables
 ** IPC_SECRET
