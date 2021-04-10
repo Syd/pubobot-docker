@@ -1,0 +1,24 @@
+#+TITLE: pubobot docker
+
+* about
+a docker container for [[https://gitlab.com/mittermichal/PUBobot-discord/-/tree/master][pubobot]]
+
+* quickstart
+#+begin_src sh
+docker run -it -d -e IPC_SECRET=<your choice> -e DISCORD_TOKEN=<your token> \
+    -e WEB_URL="http://change.me" \
+    sydz/pubobot:latest`
+#+end_src
+* variables
+** IPC_SECRET
+default: `5i2jd93j5la9`
+it's highly recommended you change this
+** DISCORD_TOKEN
+default: ""
+you *must* set a discord token
+** COMMANDS_URL
+default: "https://gitlab.com/pubobot-discord/PUBobot-discord/-/blob/master/commands.md"
+the link to available commands for the bot
+** WEB_URL
+default: "http://change.me"
+set your external url, this probably needs to be valid for OATH
