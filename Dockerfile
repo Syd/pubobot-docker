@@ -18,15 +18,18 @@ RUN apk add --no-cache py3-pip gcc python3-dev
 RUN pip3 install --upgrade pip
 USER pubobot
 WORKDIR /home/pubobot/pubobot/
+COPY run.sh .
 RUN pip3 install -r requirements.txt
+COPY config.esh .
+COPY client_config.esh .
 
-COPY --chown=pubobot:pubobot --chmod=755 run.sh .
-COPY --chown=pubobot:pubobot --chmod=755 config.esh .
-COPY --chown=pubobot:pubobot --chmod=755 client_config.esh .
 # eventually I want to drop back to base here to clean up
 RUN sed -i "/c.ipc = ipc.Server(c, secret_key=client_config.IPC_SECRET)  # create our IPC Server/{s/c,/c, host='0.0.0.0',/}" modules/client.py
-RUN chmod +x run.sh
 
+# fix permissions
+USER root
+RUN chmod +x run.sh && chown pubobot:pubobot -R /home/pubobot
+USER pubobot
 ENV IPC_SECRET "5i2jd93j5la9"
 ENV DISCORD_TOKEN ""
 ENV COMMANDS_URL "https://gitlab.com/pubobot-discord/PUBobot-discord/-/blob/master/commands.md"
