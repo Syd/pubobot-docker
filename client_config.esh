@@ -1,0 +1,7 @@
+# discord.Client.intents.presences = ?
+INTENTS_PRESENCES = True
+INTENTS_MEMBERS = True
+IPC_SECRET = "<%= $IPC_SECRET %>"
+WEB_URL = "http://localhost:5000"
+PUBLIC_WEB_URL = "<%= $WEB_URL %>"
+# SENTRY_DSN = "..."  # add dsn url and uncomment to enable sentry
