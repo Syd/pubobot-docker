@@ -31,7 +31,7 @@ while true; do
         # kill proxy command relaying stdin to server
         kill %2
         # send quit to server's stdin
-        echo $'\n'quit >&${srv_input}
+        echo quit$'\n' >&${srv_input}
         # close server's stdin
         exec {srv_input}<&-
         # wait for actual server to exit
