@@ -30,7 +30,7 @@ RUN sed -i "/c.ipc = ipc.Server(c, secret_key=client_config.IPC_SECRET)  # creat
 # fix permissions
 USER root
 RUN chmod +x run.sh && chown pubobot:pubobot -R /home/pubobot
-USER pubobot
+#USER pubobot # not running as user so we can recieve signals
 ENV IPC_SECRET "5i2jd93j5la9"
 ENV DISCORD_TOKEN ""
 ENV COMMANDS_URL "https://gitlab.com/mittermichal/PUBobot-discord/-/blob/master/commands.md"
