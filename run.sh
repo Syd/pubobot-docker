@@ -15,7 +15,7 @@ exec {srv_output}<&${COPROC[0]}-
 
 # background commands to relay normal stdin/stdout activity
 cat <&0 >&${srv_input} &
-cat <&${srv_output} >&1 >&2 &
+cat <&${srv_output} >&1 2>&1 &
 
 # set signal handler up
 term_received=false ; trap 'term_received=true' SIGTERM
