@@ -1,4 +1,4 @@
-#!/usr/bin/env sh -i
+#!/bin/bash -i
 set -euo pipefail
 
 esh -o config.cfg config.esh

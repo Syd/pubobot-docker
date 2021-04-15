@@ -14,7 +14,7 @@ RUN git clone https://gitlab.com/mittermichal/PUBobot-discord.git pubobot
 # switch to a new build stage we'll discard later
 FROM base AS build
 USER root
-RUN apk add --no-cache py3-pip gcc python3-dev
+RUN apk add --no-cache py3-pip gcc python3-dev bash
 RUN pip3 install --upgrade pip
 USER pubobot
 WORKDIR /home/pubobot/pubobot/
