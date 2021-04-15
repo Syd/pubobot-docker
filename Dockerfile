@@ -37,4 +37,6 @@ ENV DISCORD_TOKEN ""
 ENV COMMANDS_URL "https://gitlab.com/mittermichal/PUBobot-discord/-/blob/master/commands.md"
 ENV WEB_URL "http://change.me"
 EXPOSE 5000
+STOPSIGNAL SIGINT
 CMD ./run.sh
+
