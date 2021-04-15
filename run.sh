@@ -15,7 +15,7 @@ exec {srv_output}<&${COPROC[0]}-
 
 # background commands to relay normal stdin/stdout activity
 cat <&0 >&${srv_input} &
-cat <&${srv_output} >&1 &
+cat <&${srv_output} >&1 >&2 &
 
 # set signal handler up
 term_received=false ; trap 'term_received=true' SIGTERM
@@ -27,6 +27,7 @@ while true; do
     exit_status=$?
     # if sigterm received:
     if [ $exit_status -gt 128 ] && $term_received ; then
+        echo "sending quit message to pubobot"
         # kill proxy command relaying stdin to server
         kill %2
         # send quit to server's stdin
