@@ -2,7 +2,7 @@ FROM alpine:3 AS base
 
 # install git and python
 RUN apk update
-RUN apk add --no-cache git python3 py3-yarl py3-multidict esh
+RUN apk add --no-cache bash git python3 py3-yarl py3-multidict esh
 # create pubobot user + home with no password prompt
 RUN adduser pubobot -D
 
