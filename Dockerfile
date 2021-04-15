@@ -14,7 +14,9 @@ RUN git clone https://gitlab.com/mittermichal/PUBobot-discord.git pubobot
 # switch to a new build stage we'll discard later
 FROM base AS build
 USER root
+# pip for requirements, gcc & headers for packages, we need some bash features
 RUN apk add --no-cache py3-pip gcc python3-dev bash
+# gosu so we can start as root and run commands as user, keeping signals
 RUN apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing gosu
 RUN pip3 install --upgrade pip
 USER pubobot
@@ -22,10 +24,13 @@ WORKDIR /home/pubobot/pubobot/
 COPY run.sh .
 RUN pip3 install -r requirements.txt
 RUN touch database.sqlite3 && touch state.json && echo "{}" > state.json
+# put our template files in
 COPY config.esh .
 COPY client_config.esh .
 
 # eventually I want to drop back to base here to clean up
+
+# workaround to bind to 0.0.0.0 
 RUN sed -i "/c.ipc = ipc.Server(c, secret_key=client_config.IPC_SECRET)  # create our IPC Server/{s/c,/c, host='0.0.0.0',/}" modules/client.py
 # fix permissions
 USER root
@@ -36,6 +41,8 @@ ENV DISCORD_TOKEN ""
 ENV COMMANDS_URL "https://gitlab.com/mittermichal/PUBobot-discord/-/blob/master/commands.md"
 ENV WEB_URL "http://change.me"
 EXPOSE 5000
+# send sigint instead for python
 STOPSIGNAL SIGINT
+# using entrypoint instead of CMD, not sure if it was passing signals
 ENTRYPOINT ./run.sh
 
