@@ -41,6 +41,9 @@ ENV DISCORD_TOKEN ""
 ENV COMMANDS_URL "https://gitlab.com/mittermichal/PUBobot-discord/-/blob/master/commands.md"
 ENV WEB_URL "http://change.me"
 EXPOSE 5000
+# if you're using watchtower, use sigint
+LABEL com.centurylinklabs.watchtower.stop-signal="SIGINT"
+
 # send sigint instead for python
 STOPSIGNAL SIGINT
 # using entrypoint instead of CMD, not sure if it was passing signals
