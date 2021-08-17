@@ -10,6 +10,7 @@ a docker container for [[https://gitlab.com/mittermichal/PUBobot-discord/-/tree/
         -e DISCORD_TOKEN="token" \
         -v $(pwd)/database.sqlite3:/home/pubobot/pubobot/database.sqlite3 \
         -v $(pwd)/state.json:/home/pubobot/pubobot/state.json \
+        --network=host
         --restart=always
         sydz/pubobot:latest
 #+end_src

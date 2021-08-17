@@ -31,7 +31,7 @@ COPY client_config.esh .
 # eventually I want to drop back to base here to clean up
 
 # workaround to bind to 0.0.0.0 
-RUN sed -i "/c.ipc = ipc.Server(c, secret_key=client_config.IPC_SECRET)  # create our IPC Server/{s/c,/c, host='0.0.0.0',/}" modules/client.py
+#RUN sed -i "/c.ipc = ipc.Server(c, secret_key=client_config.IPC_SECRET)  # create our IPC Server/{s/c,/c, host='0.0.0.0',/}" modules/client.py
 # fix permissions
 USER root
 RUN chmod +x run.sh && chown pubobot:pubobot -R /home/pubobot
